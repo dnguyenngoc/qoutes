@@ -25,4 +25,7 @@ RUN pip install -r requirements.txt
 # copy project
 COPY ./app/ /app/
 
-EXPOSE 8081
+RUN chmod +x /app/start.sh
+
+CMD ["./start.sh"]
+

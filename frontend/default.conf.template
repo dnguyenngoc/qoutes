@@ -1,0 +1,8 @@
+# Đây là file cấu hình cho nigix localhost
+server {
+  listen $PORT default_server;
+  location / {
+    root /usr/share/nginx/html;
+	  try_files $uri $uri.html $uri/ /index.html = 404;
+  }
+}

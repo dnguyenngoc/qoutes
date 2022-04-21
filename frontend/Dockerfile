@@ -14,17 +14,11 @@ FROM nginx
 
 WORKDIR /usr/share/nginx/html
 
-RUN rm -v /etc/nginx/nginx.conf
-RUN rm -v /etc/nginx/conf.d/default.conf
-COPY ./nginx.conf /etc/nginx/
+COPY default.conf.template /etc/nginx/conf.d/default.conf.template
+COPY nginx.conf /etc/nginx/nginx.conf
 
 RUN rm -rf ./*
 
-COPY ./m_nginx.conf .
-COPY ./local_nginx.conf .
-COPY ./custom_nginx.sh .
-RUN chmod +x custom_nginx.sh
-
 COPY --from=builder /app/build .
 
-EXPOSE 80 443
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'

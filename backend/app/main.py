@@ -10,7 +10,9 @@ app = FastAPI(title="quotes", openapi_url="/api/openapi.json", docs_url="/api/do
 
 origins = [
     "http://localhost:3000",
-    "http://localhost:8081"
+    "http://localhost:8081",
+    "https://morning-sands-55388.herokuapp.com",
+    "https://obscure-brushlands-64336.herokuapp.com"
 ]
 
 app.add_middleware(
@@ -45,7 +47,3 @@ def hello():
         qoute = requests.get("https://programming-quotes-api.herokuapp.com/quotes/random")
         dicts[str_date] = {"like": 0, "unlike": 0, "en": qoute.json()['en']}
     return dicts[str_date]
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host='0.0.0.0', port=8081, debug=True)
