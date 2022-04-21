@@ -3,8 +3,6 @@ on:
   push:
     branches:
     - production  
-    paths:
-    - "frontend/**"
 env:
   # Variable name
   PROJECT_NAME: qoutes
