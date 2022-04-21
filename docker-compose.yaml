@@ -1,0 +1,24 @@
+x-api-volumes: &api-volumes
+  - ./backend/app/:/app/
+
+x-api-port: &api-port
+  - "8081:8081"
+
+x-networks: &scan-networks
+  - scan-net
+
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    container_name: backend
+    restart: unless-stopped
+    volumes: *api-volumes
+    command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8081 --reload"
+    ports: *api-port
+    networks: *scan-networks
+networks:
+  scan-net:

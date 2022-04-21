@@ -1,0 +1,5 @@
+uvicorn==0.13.4
+fastapi==0.63.0
+requests==2.27.1
+pytz
+python-multipart
